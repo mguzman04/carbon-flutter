@@ -21,7 +21,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # To add assets to your package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
@@ -52,3 +51,21 @@ flutter:
   #
   # For details regarding fonts in packages, see
   # https://flutter.dev/to/font-from-package
+  fonts:
+    - family: IBM Plex Sans
+      fonts:
+        - asset: assets/fonts/IBMPlexSans-Light.ttf
+        - asset: assets/fonts/IBMPlexSans-LightItalic.ttf
+          weight: 300
+        - asset: assets/fonts/IBMPlexSans-Regular.ttf
+        - asset: assets/fonts/IBMPlexSans-Italic.ttf
+          weight: 400
+        - asset: assets/fonts/IBMPlexSans-SemiBold.ttf
+        - asset: assets/fonts/IBMPlexSans-SemiBoldItalic.ttf
+          weight: 600
+        - asset: assets/fonts/IBMPlexSans-Bold.ttf
+          weight: 700
+    - family: IBM Plex Mono
+      fonts:
+        - asset: assets/fonts/IBMPlexMono-Regular.ttf
+          weight: 400
