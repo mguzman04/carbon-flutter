@@ -2,77 +2,77 @@ import 'package:flutter/material.dart';
 
 TextTheme createTextTheme(Color textColor) {
   return TextTheme(
-    displayLarge: _CarbonTextStyle(
+    displayLarge: CarbonTextStyle(
       textColor: textColor,
       fontSize: 57.0,
       fontWeight: FontWeight.w400,
     ),
-    displayMedium: _CarbonTextStyle(
+    displayMedium: CarbonTextStyle(
       textColor: textColor,
       fontSize: 45.0,
       fontWeight: FontWeight.w400,
     ),
-    displaySmall: _CarbonTextStyle(
+    displaySmall: CarbonTextStyle(
       textColor: textColor,
       fontSize: 36.0,
       fontWeight: FontWeight.w400,
     ),
-    headlineLarge: _CarbonTextStyle(
+    headlineLarge: CarbonTextStyle(
       textColor: textColor,
       fontSize: 32.0,
       fontWeight: FontWeight.w400,
     ),
-    headlineMedium: _CarbonTextStyle(
+    headlineMedium: CarbonTextStyle(
       textColor: textColor,
       fontSize: 28.0,
       fontWeight: FontWeight.w400,
     ),
-    headlineSmall: _CarbonTextStyle(
+    headlineSmall: CarbonTextStyle(
       textColor: textColor,
       fontSize: 24.0,
       fontWeight: FontWeight.w400,
     ),
-    titleLarge: _CarbonTextStyle(
+    titleLarge: CarbonTextStyle(
       textColor: textColor,
       fontSize: 22.0,
       fontWeight: FontWeight.w600,
     ),
-    titleMedium: _CarbonTextStyle(
+    titleMedium: CarbonTextStyle(
       textColor: textColor,
       fontSize: 16.0,
       fontWeight: FontWeight.w400,
     ),
-    titleSmall: _CarbonTextStyle(
+    titleSmall: CarbonTextStyle(
       textColor: textColor,
       fontSize: 14.0,
       fontWeight: FontWeight.w400,
     ),
-    bodyLarge: _CarbonTextStyle(
+    bodyLarge: CarbonTextStyle(
       textColor: textColor,
       fontSize: 16.0,
       fontWeight: FontWeight.w400,
     ),
-    bodyMedium: _CarbonTextStyle(
+    bodyMedium: CarbonTextStyle(
       textColor: textColor,
       fontSize: 14.0,
       fontWeight: FontWeight.w400,
     ),
-    bodySmall: _CarbonTextStyle(
+    bodySmall: CarbonTextStyle(
       textColor: textColor,
       fontSize: 12.0,
       fontWeight: FontWeight.w400,
     ),
-    labelLarge: _CarbonTextStyle(
+    labelLarge: CarbonTextStyle(
       textColor: textColor,
       fontSize: 14.0,
       fontWeight: FontWeight.w600,
     ),
-    labelMedium: _CarbonTextStyle(
+    labelMedium: CarbonTextStyle(
       textColor: textColor,
       fontSize: 12.0,
       fontWeight: FontWeight.w400,
     ),
-    labelSmall: _CarbonTextStyle(
+    labelSmall: CarbonTextStyle(
       textColor: textColor,
       fontSize: 11.0,
       fontWeight: FontWeight.w400,
@@ -80,8 +80,9 @@ TextTheme createTextTheme(Color textColor) {
   );
 }
 
-class _CarbonTextStyle extends TextStyle {
-  const _CarbonTextStyle({
+// TODO: I made this public, but it should probably be private.
+class CarbonTextStyle extends TextStyle {
+  const CarbonTextStyle({
     required this.textColor,
     super.fontSize,
     super.fontWeight,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:carbon_flutter/carbon_flutter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -104,6 +105,10 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            CarbonElevatedButton(
+              label: 'IBM Plex Font',
+              onPressed: () => print('Carbon button pressed'),
+            ),
             const Text('You have pushed the button this many times:'),
             Text(
               '$_counter',

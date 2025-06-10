@@ -1,7 +1,10 @@
+import 'package:carbon_flutter/src/themes/text_theme.dart';
 import 'package:flutter/material.dart';
 
 ButtonStyle _carbonButtonStyle = ButtonStyle(
-  // textStyle: ,
+  textStyle: WidgetStateProperty.all<TextStyle>(
+    CarbonTextStyle(textColor: Colors.red), // TODO: This doesn't do anything
+  ),
   backgroundColor: WidgetStateProperty.resolveWith<Color>((
     Set<WidgetState> states,
   ) {
@@ -11,7 +14,7 @@ ButtonStyle _carbonButtonStyle = ButtonStyle(
     }
     return Color(0xff0f62fe); // Use the default color in other states
   }),
-  // foregroundColor: ,
+  foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
   // overlayColor: ,
   // shadowColor: ,
   // surfaceTintColor: ,
