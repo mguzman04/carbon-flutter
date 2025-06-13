@@ -10,12 +10,22 @@ ButtonStyle _carbonButtonStyle = ButtonStyle(
   ) {
     if (states.contains(WidgetState.hovered)) {
       return Color(0xff0050e6);
-      // return Colors.orange;
+    }
+    if (states.contains(WidgetState.focused)) {
+      return Color(0xff0050e6);
+    }
+    if (states.contains(WidgetState.disabled)) {
+      return Color(0xFFC6C6C6);
     }
     return Color(0xff0f62fe); // Use the default color in other states
   }),
   foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
-  // overlayColor: ,
+  overlayColor: WidgetStateProperty.fromMap(<WidgetStatesConstraint, Color>{
+    WidgetState.focused: Colors.transparent,
+    WidgetState.pressed: Color(0xff002d9c),
+    WidgetState.hovered: Colors.transparent,
+    WidgetState.any: Colors.transparent,
+  }),
   // shadowColor: ,
   // surfaceTintColor: ,
   // elevation: ,
@@ -27,8 +37,18 @@ ButtonStyle _carbonButtonStyle = ButtonStyle(
   // iconSize: ,
   // iconAlignment: ,
   // side: ,
-  shape: WidgetStateProperty.all(
-    RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+  shape: WidgetStateProperty<OutlinedBorder?>.fromMap(
+    <WidgetStatesConstraint, OutlinedBorder>{
+      WidgetState.focused: RoundedRectangleBorder(
+        borderRadius: BorderRadius.zero,
+        side: BorderSide(color: Colors.white, width: 1.0, strokeAlign: -2.5),
+      ),
+      WidgetState.pressed: RoundedRectangleBorder(
+        borderRadius: BorderRadius.zero,
+        side: BorderSide(color: Colors.white, width: 1.0, strokeAlign: -2.5),
+      ),
+      WidgetState.any: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+    },
   ),
   // mouseCursor: ,
   // visualDensity: ,
@@ -36,21 +56,44 @@ ButtonStyle _carbonButtonStyle = ButtonStyle(
   // animationDuration: ,
   // enableFeedback: ,
   // alignment: ,
-  // splashFactory: ,
+  splashFactory: NoSplash.splashFactory,
   // backgroundBuilder: ,
   // foregroundBuilder: ,
 );
+
+/// Carbon button types
+///
+/// Purpose:
+/// - Primary: Main action button, typically used for primary actions.
+/// - Secondary: Used for secondary actions used in conjunction with primary actions. For example, a "Cancel" button next to a "Save" button.
+/// - Tertiary: Used for less prominent actions, and sometimes independent actions.
+/// - Ghost: A button with no background, used for the least prominent actions.
+/// - Danger: Used for destructive actions, such as deleting an item. The style used will depend on the prominence of the action.
+enum CarbonButtonType {
+  primary,
+  secondary,
+  tertiary,
+  ghost,
+  danger,
+  dangerTertiary,
+  dangerGhost,
+}
 
 class CarbonElevatedButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
   final bool isEnabled;
+  final CarbonButtonType type;
 
+  /// Create a Carbon-styled button.
+  ///
+  /// See [CarbonButtonType] for the different types of buttons available.
   const CarbonElevatedButton({
     Key? key,
     required this.label,
     this.onPressed,
     this.isEnabled = true,
+    this.type = CarbonButtonType.primary,
   }) : super(key: key);
 
   @override

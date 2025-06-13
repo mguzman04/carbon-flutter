@@ -108,6 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
             CarbonElevatedButton(
               label: 'IBM Plex Font',
               onPressed: () => print('Carbon button pressed'),
+              type: CarbonButtonType.primary,
             ),
             const Text('You have pushed the button this many times:'),
             Text(
