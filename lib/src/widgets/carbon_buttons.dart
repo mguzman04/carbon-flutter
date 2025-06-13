@@ -1,7 +1,7 @@
 import 'package:carbon_flutter/src/themes/text_theme.dart';
 import 'package:flutter/material.dart';
 
-ButtonStyle _carbonButtonStyle = ButtonStyle(
+ButtonStyle _carbonPrimaryButtonStyle = ButtonStyle(
   textStyle: WidgetStateProperty.all<TextStyle>(
     CarbonTextStyle(textColor: Colors.red), // TODO: This doesn't do anything
   ),
@@ -61,6 +61,56 @@ ButtonStyle _carbonButtonStyle = ButtonStyle(
   // foregroundBuilder: ,
 );
 
+ButtonStyle _carbonSecondaryButtonStyle = ButtonStyle(
+  textStyle: WidgetStateProperty.all<TextStyle>(
+    CarbonTextStyle(textColor: Colors.red), // TODO: This doesn't do anything
+  ),
+  backgroundColor: WidgetStateProperty.resolveWith<Color>((
+    Set<WidgetState> states,
+  ) {
+    if (states.contains(WidgetState.hovered)) {
+      return Color(0xFF474747);
+    }
+    if (states.contains(WidgetState.focused)) {
+      return Color(0xFF474747);
+    }
+    if (states.contains(WidgetState.disabled)) {
+      return Color(0xFFC6C6C6);
+    }
+    return Color(0xff393939); // Use the default color in other states
+  }),
+  foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+  overlayColor: WidgetStateProperty.fromMap(<WidgetStatesConstraint, Color>{
+    WidgetState.focused: Colors.transparent,
+    WidgetState.pressed: Color(0xFF6F6F6F),
+    WidgetState.hovered: Colors.transparent,
+    WidgetState.any: Colors.transparent,
+  }),
+
+  padding: WidgetStateProperty.all(EdgeInsets.fromLTRB(16, 20, 64, 20)),
+  shape: WidgetStateProperty<OutlinedBorder?>.fromMap(
+    <WidgetStatesConstraint, OutlinedBorder>{
+      WidgetState.focused: RoundedRectangleBorder(
+        borderRadius: BorderRadius.zero,
+        side: BorderSide(color: Colors.white, width: 1.0, strokeAlign: -2.5),
+      ),
+      WidgetState.pressed: RoundedRectangleBorder(
+        borderRadius: BorderRadius.zero,
+        side: BorderSide(color: Colors.white, width: 1.0, strokeAlign: -2.5),
+      ),
+      WidgetState.any: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+    },
+  ),
+
+  splashFactory: NoSplash.splashFactory,
+);
+
+ButtonStyle _carbonTertiaryButtonStyle = ButtonStyle();
+ButtonStyle _carbonGhostButtonStyle = ButtonStyle();
+ButtonStyle _carbonDangerButtonStyle = ButtonStyle();
+ButtonStyle _carbonDangerTertiaryButtonStyle = ButtonStyle();
+ButtonStyle _carbonDangerGhostButtonStyle = ButtonStyle();
+
 /// Carbon button types
 ///
 /// Purpose:
@@ -89,17 +139,25 @@ class CarbonElevatedButton extends StatelessWidget {
   ///
   /// See [CarbonButtonType] for the different types of buttons available.
   const CarbonElevatedButton({
-    Key? key,
+    super.key,
     required this.label,
     this.onPressed,
     this.isEnabled = true,
     this.type = CarbonButtonType.primary,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: _carbonButtonStyle,
+      style: switch (type) {
+        CarbonButtonType.primary => _carbonPrimaryButtonStyle,
+        CarbonButtonType.secondary => _carbonSecondaryButtonStyle,
+        CarbonButtonType.tertiary => _carbonTertiaryButtonStyle,
+        CarbonButtonType.ghost => _carbonGhostButtonStyle,
+        CarbonButtonType.danger => _carbonDangerButtonStyle,
+        CarbonButtonType.dangerTertiary => _carbonDangerTertiaryButtonStyle,
+        CarbonButtonType.dangerGhost => _carbonDangerGhostButtonStyle,
+      },
       onPressed: isEnabled ? onPressed : null,
       child: Text(label),
     );

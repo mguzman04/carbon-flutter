@@ -110,6 +110,11 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () => print('Carbon button pressed'),
               type: CarbonButtonType.primary,
             ),
+            CarbonElevatedButton(
+              label: 'IBM Plex Font',
+              onPressed: () => print('Carbon button pressed'),
+              type: CarbonButtonType.secondary,
+            ),
             const Text('You have pushed the button this many times:'),
             Text(
               '$_counter',
