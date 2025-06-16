@@ -29,7 +29,18 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        // colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 251, 251, 251)),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color.fromARGB(255, 251, 251, 251),
+          primary: carbonBlue60,
+          onPrimary: carbonWhite,
+          secondary: carbonGray90,
+          onSecondary: carbonWhite,
+          error: carbonRed60,
+          onError: carbonWhite,
+          surface: carbonGray10,
+          onSurface: carbonGray90,
+        ),
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -110,10 +121,21 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () => print('Carbon button pressed'),
               type: CarbonButtonType.primary,
             ),
+            Padding(
+              padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0),
+            ),
             CarbonElevatedButton(
               label: 'IBM Plex Font',
               onPressed: () => print('Carbon button pressed'),
               type: CarbonButtonType.secondary,
+            ),
+            Padding(
+              padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0),
+            ),
+            CarbonElevatedButton(
+              label: 'IBM Plex Font',
+              onPressed: () => print('Carbon button pressed'),
+              type: CarbonButtonType.tertiary,
             ),
             const Text('You have pushed the button this many times:'),
             Text(
