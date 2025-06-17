@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-TextTheme createTextTheme(Color textColor) {
+TextTheme carbonTextTheme(Color textColor) {
   return TextTheme(
     displayLarge: CarbonTextStyle(
       textColor: textColor,

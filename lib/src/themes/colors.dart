@@ -344,6 +344,19 @@ class CarbonThemeData {
     required this.tagBorderGreen,
   });
 
+  // Colors derived from [brightness]
+  factory CarbonThemeData.fromBrightness(Brightness brightness) {
+    return switch (brightness) {
+      Brightness.light => CarbonThemeData.white,
+      Brightness.dark => CarbonThemeData.gray100,
+    };
+  }
+
+  // Colors for the given [context]
+  static CarbonThemeData of(BuildContext context) {
+    return CarbonThemeData.from(Theme.of(context).brightness);
+  }
+
   static const white = CarbonThemeData._(
     background: carbonWhite,
     backgroundHover: Color.fromRGBO(

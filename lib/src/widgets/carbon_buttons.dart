@@ -123,11 +123,9 @@ ButtonStyle _carbonTertiaryButtonStyle = ButtonStyle(
       return Color(0xFF0050E6);
     }
     if (states.contains(WidgetState.disabled)) {
-      return Colors.white; // FIXME: Should be transparent
+      return Colors.transparent;
     }
-    return Colors.white;
-
-    /// FIXME: Should be transparent
+    return Colors.transparent;
   }),
   foregroundColor: WidgetStateProperty.resolveWith<Color>((
     Set<WidgetState> states,
