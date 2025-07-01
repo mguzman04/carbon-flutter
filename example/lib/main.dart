@@ -122,6 +122,20 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () => print('Carbon button pressed'),
               type: CarbonButtonType.tertiary,
             ),
+            Padding(
+              padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0),
+            ),
+            CarbonContextSwitch(
+              onSelectionChanged: (Set<dynamic> newSelection) {
+                print('Selected segments: $newSelection');
+              },
+              segments: [
+                ButtonSegment(value: 0, label: const Text('Segment 1')),
+                ButtonSegment(value: 1, label: const Text('Segment 2')),
+                ButtonSegment(value: 2, label: const Text('Segment 3')),
+              ],
+              selected: {1},
+            ),
             const Text('You have pushed the button this many times:'),
             Text(
               '$_counter',
