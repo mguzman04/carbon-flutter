@@ -65,7 +65,7 @@ TextTheme carbonTextTheme(Color textColor) {
     labelLarge: CarbonTextStyle(
       textColor: textColor,
       fontSize: 14.0,
-      fontWeight: FontWeight.w600,
+      fontWeight: FontWeight.w400,
     ),
     labelMedium: CarbonTextStyle(
       textColor: textColor,

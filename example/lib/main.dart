@@ -130,9 +130,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 print('Selected segments: $newSelection');
               },
               segments: [
-                ButtonSegment(value: 0, label: const Text('Segment 1')),
-                ButtonSegment(value: 1, label: const Text('Segment 2')),
-                ButtonSegment(value: 2, label: const Text('Segment 3')),
+                ButtonSegment(value: 0, label: const Text('First section')),
+                ButtonSegment(value: 1, label: const Text('Second section')),
+                ButtonSegment(value: 2, label: const Text('Third section')),
               ],
               selected: {1},
             ),
