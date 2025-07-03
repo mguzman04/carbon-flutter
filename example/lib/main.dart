@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           onSurface: carbonGray90,
         ),
       ),
-      home: const MyHomePage(title: 'Carbon Flutter Demo'),
+      home: const MyHomePage(title: 'Acsys Plotting'),
     );
   }
 }
@@ -82,6 +82,9 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
+      drawer: Drawer(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0.0)),
+      ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -134,21 +137,21 @@ class _MyHomePageState extends State<MyHomePage> {
                 ButtonSegment(value: 1, label: const Text('Second section')),
                 ButtonSegment(value: 2, label: const Text('Third section')),
               ],
-              selected: {1},
+              selected: {2},
             ),
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            // const Text('You have pushed the button this many times:'),
+            // Text(
+            //   '$_counter',
+            //   style: Theme.of(context).textTheme.headlineMedium,
+            // ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Increment',
+      //   child: const Icon(Icons.add),
+      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

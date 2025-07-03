@@ -402,7 +402,12 @@ class CarbonThemeData {
     layerSelectedHover02: carbonGrayHover20,
     layerSelectedHover03: carbonGrayHover20,
     layerSelectedInverse: carbonGray100,
-    layerSelectedDisabled: carbonGray50,
+    layerSelectedDisabled: Color.from(
+      alpha: 1,
+      red: 0.553,
+      green: 0.553,
+      blue: 0.553,
+    ),
     layerAccent01: carbonGray20,
     layerAccent02: carbonGray20,
     layerAccent03: carbonGray20,

@@ -17,17 +17,27 @@ class CarbonContextSwitch extends StatelessWidget {
       segments: segments,
       selected: selected,
       onSelectionChanged: onSelectionChanged,
+      // onSelectionChanged: null,
       showSelectedIcon: false,
       style: _carbonContextSwitchStyle,
     );
   }
 }
 
-const _carbonContextSwitchStyle = ButtonStyle(
+ButtonStyle _carbonContextSwitchStyle = ButtonStyle(
   // alignment: ,
   // animationDuration: ,
   // backgroundBuilder: ,
-  // backgroundColor: ,
+  backgroundColor: WidgetStateProperty.resolveWith<Color>((states) {
+    if (states.contains(WidgetState.disabled) &&
+        states.contains(WidgetState.selected)) {
+      return Color(0xFF8D8D8D);
+    }
+    if (states.contains(WidgetState.selected)) {
+      return Color(0xFF161616);
+    }
+    return Colors.transparent;
+  }),
   elevation: WidgetStatePropertyAll(0.0),
   // enableFeedback:,
   // fixedSize: ,
@@ -47,7 +57,7 @@ const _carbonContextSwitchStyle = ButtonStyle(
       borderRadius: BorderRadiusGeometry.all(Radius.circular(4.0)),
     ),
   ),
-  // side: ,
+  // side:,
   splashFactory: NoSplash.splashFactory,
   // surfaceTintColor: ,
   // tapTargetSize: ,
