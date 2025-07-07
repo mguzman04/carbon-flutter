@@ -1,44 +1,49 @@
 import 'package:carbon_flutter/src/themes/text_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:carbon_flutter/src/themes/colors.dart';
 
-ButtonStyle _carbonPrimaryButtonStyle = ButtonStyle(
-  textStyle: WidgetStateProperty.all<TextStyle>(
-    CarbonTextStyle(textColor: Colors.red), // TODO: This doesn't do anything
-  ),
-  backgroundColor: WidgetStateProperty.resolveWith<Color>((
-    Set<WidgetState> states,
-  ) {
-    if (states.contains(WidgetState.hovered)) {
-      return Color(0xff0050e6);
-    }
-    if (states.contains(WidgetState.focused)) {
-      return Color(0xff0050e6);
-    }
-    if (states.contains(WidgetState.disabled)) {
-      return Color(0xFFC6C6C6);
-    }
-    return Color(0xff0f62fe); // Use the default color in other states
-  }),
-  foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
-  overlayColor: WidgetStateProperty.fromMap(<WidgetStatesConstraint, Color>{
-    WidgetState.focused: Colors.transparent,
-    WidgetState.pressed: Color(0xff002d9c),
-    WidgetState.hovered: Colors.transparent,
-    WidgetState.any: Colors.transparent,
-  }),
-  // shadowColor: ,
-  // surfaceTintColor: ,
-  elevation: WidgetStateProperty.all<double>(0.0),
-  padding: WidgetStateProperty.all(EdgeInsets.fromLTRB(16, 20, 64, 20)),
-  // minimumSize: ,
-  // fixedSize: ,
-  // maximumSize: ,
-  // iconColor: ,
-  // iconSize: ,
-  // iconAlignment: ,
-  // side: ,
-  shape: WidgetStateProperty<OutlinedBorder?>.fromMap(
-    <WidgetStatesConstraint, OutlinedBorder>{
+ButtonStyle _carbonPrimaryButtonStyle(BuildContext context) {
+  final carbonTheme = Theme.of(context).extension<CarbonTheme>()!;
+  return ButtonStyle(
+    textStyle: WidgetStateProperty.all<TextStyle>(
+      CarbonTextStyle(textColor: Colors.red), // TODO: This doesn't do anything
+    ),
+    backgroundColor: WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.hovered)) {
+        return carbonTheme.buttonPrimaryHover;
+      }
+      if (states.contains(WidgetState.focused)) {
+        return carbonTheme.buttonPrimary;
+      }
+      if (states.contains(WidgetState.disabled)) {
+        return carbonTheme.buttonDisabled;
+      }
+      return carbonTheme.buttonPrimary; // Use the default color in other states
+    }),
+    foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+    overlayColor: WidgetStateProperty.fromMap(<WidgetStatesConstraint, Color>{
+      WidgetState.focused: Colors.transparent,
+      WidgetState.pressed: carbonTheme.buttonPrimaryActive,
+      WidgetState.hovered: Colors.transparent,
+      WidgetState.any: Colors.transparent,
+    }),
+    // shadowColor: ,
+    // surfaceTintColor: ,
+    elevation: WidgetStateProperty.all<double>(0.0),
+    padding: WidgetStateProperty.all(EdgeInsets.fromLTRB(16, 20, 64, 20)),
+    // minimumSize: ,
+    // fixedSize: ,
+    // maximumSize: ,
+    // iconColor: ,
+    // iconSize: ,
+    // iconAlignment: ,
+    // side: ,
+    shape: WidgetStateProperty<OutlinedBorder?>.fromMap(<
+      WidgetStatesConstraint,
+      OutlinedBorder
+    >{
       WidgetState.focused: RoundedRectangleBorder(
         borderRadius: BorderRadius.zero,
         side: BorderSide(color: Colors.white, width: 1.0, strokeAlign: -2.5),
@@ -48,50 +53,54 @@ ButtonStyle _carbonPrimaryButtonStyle = ButtonStyle(
         side: BorderSide(color: Colors.white, width: 1.0, strokeAlign: -2.5),
       ),
       WidgetState.any: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-    },
-  ),
-  // mouseCursor: ,
-  // visualDensity: ,
-  // tapTargetSize: ,
-  // animationDuration: ,
-  // enableFeedback: ,
-  // alignment: ,
-  splashFactory: NoSplash.splashFactory,
-  // backgroundBuilder: ,
-  // foregroundBuilder: ,
-);
+    }),
+    // mouseCursor: ,
+    // visualDensity: ,
+    // tapTargetSize: ,
+    // animationDuration: ,
+    // enableFeedback: ,
+    // alignment: ,
+    splashFactory: NoSplash.splashFactory,
+    // backgroundBuilder: ,
+    // foregroundBuilder: ,
+  );
+}
 
-ButtonStyle _carbonSecondaryButtonStyle = ButtonStyle(
-  textStyle: WidgetStateProperty.all<TextStyle>(
-    CarbonTextStyle(
-      textColor: Colors.red,
-    ), // TODO: This doesn't do anything, foregroundColor is used instead
-  ),
-  backgroundColor: WidgetStateProperty.resolveWith<Color>((
-    Set<WidgetState> states,
-  ) {
-    if (states.contains(WidgetState.hovered)) {
-      return Color(0xFF474747);
-    }
-    if (states.contains(WidgetState.focused)) {
-      return Color(0xFF474747);
-    }
-    if (states.contains(WidgetState.disabled)) {
-      return Color(0xFFC6C6C6);
-    }
-    return Color(0xff393939); // Use the default color in other states
-  }),
-  foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
-  overlayColor: WidgetStateProperty.fromMap(<WidgetStatesConstraint, Color>{
-    WidgetState.focused: Colors.transparent,
-    WidgetState.pressed: Color(0xFF6F6F6F),
-    WidgetState.hovered: Colors.transparent,
-    WidgetState.any: Colors.transparent,
-  }),
-  elevation: WidgetStateProperty.all<double>(0.0),
-  padding: WidgetStateProperty.all(EdgeInsets.fromLTRB(16, 20, 64, 20)),
-  shape: WidgetStateProperty<OutlinedBorder?>.fromMap(
-    <WidgetStatesConstraint, OutlinedBorder>{
+ButtonStyle _carbonSecondaryButtonStyle(BuildContext context) {
+  final carbonTheme = Theme.of(context).extension<CarbonTheme>()!;
+  return ButtonStyle(
+    textStyle: WidgetStateProperty.all<TextStyle>(
+      CarbonTextStyle(
+        textColor: Colors.red,
+      ), // TODO: This doesn't do anything, foregroundColor is used instead
+    ),
+    backgroundColor: WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.hovered)) {
+        return Color(0xFF474747);
+      }
+      if (states.contains(WidgetState.focused)) {
+        return Color(0xFF474747);
+      }
+      if (states.contains(WidgetState.disabled)) {
+        return Color(0xFFC6C6C6);
+      }
+      return Color(0xff393939); // Use the default color in other states
+    }),
+    foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+    overlayColor: WidgetStateProperty.fromMap(<WidgetStatesConstraint, Color>{
+      WidgetState.focused: Colors.transparent,
+      WidgetState.pressed: Color(0xFF6F6F6F),
+      WidgetState.hovered: Colors.transparent,
+      WidgetState.any: Colors.transparent,
+    }),
+    elevation: WidgetStateProperty.all<double>(0.0),
+    padding: WidgetStateProperty.all(EdgeInsets.fromLTRB(16, 20, 64, 20)),
+    shape: WidgetStateProperty<OutlinedBorder?>.fromMap(<
+      WidgetStatesConstraint,
+      OutlinedBorder
+    >{
       WidgetState.focused: RoundedRectangleBorder(
         borderRadius: BorderRadius.zero,
         side: BorderSide(color: Colors.white, width: 1.0, strokeAlign: -2.5),
@@ -101,76 +110,90 @@ ButtonStyle _carbonSecondaryButtonStyle = ButtonStyle(
         side: BorderSide(color: Colors.white, width: 1.0, strokeAlign: -2.5),
       ),
       WidgetState.any: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-    },
-  ),
+    }),
 
-  splashFactory: NoSplash.splashFactory,
-);
+    splashFactory: NoSplash.splashFactory,
+  );
+}
 
-ButtonStyle _carbonTertiaryButtonStyle = ButtonStyle(
-  textStyle: WidgetStateProperty.all<TextStyle>(
-    CarbonTextStyle(
-      textColor: Colors.red,
-    ), // TODO: This doesn't do anything, forground is used instead
-  ),
-  backgroundColor: WidgetStateProperty.resolveWith<Color>((
-    Set<WidgetState> states,
-  ) {
-    if (states.contains(WidgetState.hovered)) {
-      return Color(0xFF0050E6);
-    }
-    if (states.contains(WidgetState.focused)) {
-      return Color(0xFF0050E6);
-    }
-    if (states.contains(WidgetState.disabled)) {
+ButtonStyle _carbonTertiaryButtonStyle(BuildContext context) {
+  final carbonTheme = Theme.of(context).extension<CarbonTheme>()!;
+  return ButtonStyle(
+    textStyle: WidgetStateProperty.all<TextStyle>(
+      CarbonTextStyle(
+        textColor: Colors.red,
+      ), // TODO: This doesn't do anything, forground is used instead
+    ),
+    backgroundColor: WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.hovered)) {
+        // return Color(0xFF0050E6);
+        return carbonTheme.buttonTertiaryHover;
+      }
+      if (states.contains(WidgetState.focused)) {
+        // return Color(0xFF0050E6);
+        return carbonTheme.buttonTertiaryHover;
+      }
+      if (states.contains(WidgetState.disabled)) {
+        return Colors.transparent;
+      }
       return Colors.transparent;
-    }
-    return Colors.transparent;
-  }),
-  foregroundColor: WidgetStateProperty.resolveWith<Color>((
-    Set<WidgetState> states,
-  ) {
-    if (states.contains(WidgetState.hovered)) {
-      return Colors.white;
-    }
-    if (states.contains(WidgetState.focused)) {
-      return Colors.white;
-    }
-    if (states.contains(WidgetState.pressed)) {
-      return Colors.white;
-    }
-    if (states.contains(WidgetState.disabled)) {
-      return Color.fromRGBO(22, 22, 22, .25);
-    }
-    return Color(0xFF0F62FE); // Use the default color in other states
-  }),
-  overlayColor: WidgetStateProperty.fromMap(<WidgetStatesConstraint, Color>{
-    WidgetState.focused: Colors.transparent,
-    WidgetState.pressed: Color(0xFF002D9C),
-    WidgetState.hovered: Colors.transparent,
-    WidgetState.any: Colors.transparent,
-  }),
-  elevation: WidgetStateProperty.all<double>(0.0),
-  padding: WidgetStateProperty.all(EdgeInsets.fromLTRB(16, 20, 64, 20)),
-  shape: WidgetStateProperty<OutlinedBorder?>.fromMap(
-    <WidgetStatesConstraint, OutlinedBorder>{
-      WidgetState.focused: RoundedRectangleBorder(
-        borderRadius: BorderRadius.zero,
-        side: BorderSide(color: Colors.white, width: 1.0, strokeAlign: -2.5),
-      ),
-      WidgetState.pressed: RoundedRectangleBorder(
-        borderRadius: BorderRadius.zero,
-        side: BorderSide(color: Colors.white, width: 1.0, strokeAlign: -2.5),
-      ),
-      WidgetState.any: RoundedRectangleBorder(
-        borderRadius: BorderRadius.zero,
-        side: BorderSide(color: Color(0xFF0F62FE)),
-      ),
-    },
-  ),
+    }),
+    foregroundColor: WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.hovered)) {
+        return carbonTheme.textInverse;
+      }
+      if (states.contains(WidgetState.focused)) {
+        return carbonTheme.textInverse;
+      }
+      if (states.contains(WidgetState.pressed)) {
+        return carbonTheme.textInverse;
+      }
+      if (states.contains(WidgetState.disabled)) {
+        return Color.fromRGBO(22, 22, 22, .25);
+      }
+      return carbonTheme
+          .buttonTertiary; // Use the default color in other states
+    }),
+    overlayColor: WidgetStateProperty.fromMap(<WidgetStatesConstraint, Color>{
+      WidgetState.focused: Colors.transparent,
+      WidgetState.pressed: carbonTheme.buttonTertiaryActive,
+      WidgetState.hovered: Colors.transparent,
+      WidgetState.any: Colors.transparent,
+    }),
+    elevation: WidgetStateProperty.all<double>(0.0),
+    padding: WidgetStateProperty.all(EdgeInsets.fromLTRB(16, 20, 64, 20)),
+    shape: WidgetStateProperty<OutlinedBorder?>.fromMap(
+      <WidgetStatesConstraint, OutlinedBorder>{
+        WidgetState.focused: RoundedRectangleBorder(
+          borderRadius: BorderRadius.zero,
+          side: BorderSide(
+            color: carbonTheme.focusInset,
+            width: 1.0,
+            strokeAlign: -2.5,
+          ),
+        ),
+        WidgetState.pressed: RoundedRectangleBorder(
+          borderRadius: BorderRadius.zero,
+          side: BorderSide(
+            color: carbonTheme.focusInset,
+            width: 1.0,
+            strokeAlign: -2.5,
+          ),
+        ),
+        WidgetState.any: RoundedRectangleBorder(
+          borderRadius: BorderRadius.zero,
+          side: BorderSide(color: carbonTheme.buttonTertiary),
+        ),
+      },
+    ),
 
-  splashFactory: NoSplash.splashFactory,
-);
+    splashFactory: NoSplash.splashFactory,
+  );
+}
 
 ButtonStyle _carbonGhostButtonStyle = ButtonStyle();
 ButtonStyle _carbonDangerButtonStyle = ButtonStyle();
@@ -216,9 +239,9 @@ class CarbonElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: switch (type) {
-        CarbonButtonType.primary => _carbonPrimaryButtonStyle,
-        CarbonButtonType.secondary => _carbonSecondaryButtonStyle,
-        CarbonButtonType.tertiary => _carbonTertiaryButtonStyle,
+        CarbonButtonType.primary => _carbonPrimaryButtonStyle(context),
+        CarbonButtonType.secondary => _carbonSecondaryButtonStyle(context),
+        CarbonButtonType.tertiary => _carbonTertiaryButtonStyle(context),
         CarbonButtonType.ghost => _carbonGhostButtonStyle,
         CarbonButtonType.danger => _carbonDangerButtonStyle,
         CarbonButtonType.dangerTertiary => _carbonDangerTertiaryButtonStyle,

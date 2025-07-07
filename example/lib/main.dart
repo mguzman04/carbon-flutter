@@ -26,6 +26,22 @@ class MyApp extends StatelessWidget {
           surface: carbonWhite,
           onSurface: carbonGray90,
         ),
+        extensions: <ThemeExtension<dynamic>>[CarbonTheme.white],
+      ),
+      darkTheme: ThemeData(
+        textTheme: carbonTextTheme(carbonGray100),
+        colorScheme: ColorScheme.dark(
+          brightness: Brightness.dark,
+          primary: carbonBlue60,
+          onPrimary: carbonWhite,
+          secondary: carbonGray90,
+          onSecondary: carbonWhite,
+          error: carbonRed60,
+          onError: carbonWhite,
+          surface: carbonGray100,
+          onSurface: carbonGray10,
+        ),
+        extensions: <ThemeExtension<dynamic>>[CarbonTheme.gray100],
       ),
       home: const MyHomePage(title: 'Acsys Plotting'),
     );
@@ -128,17 +144,17 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0),
             ),
-            CarbonContextSwitch(
-              onSelectionChanged: (Set<dynamic> newSelection) {
-                print('Selected segments: $newSelection');
-              },
-              segments: [
-                ButtonSegment(value: 0, label: const Text('First section')),
-                ButtonSegment(value: 1, label: const Text('Second section')),
-                ButtonSegment(value: 2, label: const Text('Third section')),
-              ],
-              selected: {2},
-            ),
+            // CarbonContextSwitch(
+            //   onSelectionChanged: (Set<dynamic> newSelection) {
+            //     print('Selected segments: $newSelection');
+            //   },
+            //   segments: [
+            //     ButtonSegment(value: 0, label: const Text('First section')),
+            //     ButtonSegment(value: 1, label: const Text('Second section')),
+            //     ButtonSegment(value: 2, label: const Text('Third section')),
+            //   ],
+            //   selected: {2},
+            // ),
             // const Text('You have pushed the button this many times:'),
             // Text(
             //   '$_counter',
