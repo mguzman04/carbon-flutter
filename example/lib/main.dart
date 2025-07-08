@@ -121,45 +121,24 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             CarbonElevatedButton(
-              label: 'IBM Plex Font',
+              label: 'Primary Button',
               onPressed: () => print('Carbon button pressed'),
               type: CarbonButtonType.primary,
             ),
             Padding(
               padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0),
             ),
-            CarbonElevatedButton(
-              label: 'IBM Plex Font',
-              onPressed: () => print('Carbon button pressed'),
-              type: CarbonButtonType.secondary,
+            CarbonContextSwitch(
+              onSelectionChanged: (Set<dynamic> newSelection) {
+                print('Selected segments: $newSelection');
+              },
+              segments: [
+                ButtonSegment(value: 0, label: const Text('First section')),
+                ButtonSegment(value: 1, label: const Text('Second section')),
+                ButtonSegment(value: 2, label: const Text('Third section')),
+              ],
+              selected: {2},
             ),
-            Padding(
-              padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0),
-            ),
-            CarbonElevatedButton(
-              label: 'IBM Plex Font',
-              onPressed: () => print('Carbon button pressed'),
-              type: CarbonButtonType.tertiary,
-            ),
-            Padding(
-              padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0),
-            ),
-            // CarbonContextSwitch(
-            //   onSelectionChanged: (Set<dynamic> newSelection) {
-            //     print('Selected segments: $newSelection');
-            //   },
-            //   segments: [
-            //     ButtonSegment(value: 0, label: const Text('First section')),
-            //     ButtonSegment(value: 1, label: const Text('Second section')),
-            //     ButtonSegment(value: 2, label: const Text('Third section')),
-            //   ],
-            //   selected: {2},
-            // ),
-            // const Text('You have pushed the button this many times:'),
-            // Text(
-            //   '$_counter',
-            //   style: Theme.of(context).textTheme.headlineMedium,
-            // ),
           ],
         ),
       ),
