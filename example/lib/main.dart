@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Carbon Flutter',
       theme: ThemeData(
         textTheme: carbonTextTheme(carbonGray100),
         colorScheme: ColorScheme.light(
@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
         ),
         extensions: <ThemeExtension<dynamic>>[CarbonTheme.gray100],
       ),
-      home: const MyHomePage(title: 'Acsys Plotting'),
+      home: const MyHomePage(title: 'Carbon Flutter'),
     );
   }
 }
@@ -93,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
         // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
@@ -120,6 +120,13 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            SizedBox(
+              width: 200.0, // Set your desired width
+              child: CarbonTextInput(),
+            ),
+            Padding(
+              padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0),
+            ),
             CarbonElevatedButton(
               label: 'Primary Button',
               onPressed: () => print('Carbon button pressed'),
