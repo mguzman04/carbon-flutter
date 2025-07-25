@@ -128,25 +128,36 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0),
             ),
-            CarbonContextSwitch(
-              onSelectionChanged: (Set<dynamic> newSelection) {
-                print('Selected segments: $newSelection');
-              },
-              segments: [
-                ButtonSegment(value: 0, label: const Text('First section')),
-                ButtonSegment(value: 1, label: const Text('Second section')),
-                ButtonSegment(value: 2, label: const Text('Third section')),
-              ],
-              selected: {2},
-            ),
+            ContextSwitch(),
           ],
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: const Icon(Icons.add),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class ContextSwitch extends StatefulWidget {
+  const ContextSwitch({super.key});
+
+  @override
+  State<ContextSwitch> createState() => _ContextSwitchState();
+}
+
+class _ContextSwitchState extends State<ContextSwitch> {
+  var selectedSegment = 2;
+
+  @override
+  Widget build(BuildContext context) {
+    return CarbonContextSwitch(
+      onSelectionChanged: (Set<dynamic> newSelection) {
+        setState(() => selectedSegment = newSelection.first);
+      },
+      segments: [
+        ButtonSegment(value: 0, label: const Text('First section')),
+        ButtonSegment(value: 1, label: const Text('Second section')),
+        ButtonSegment(value: 2, label: const Text('Third section')),
+      ],
+      selected: {selectedSegment},
     );
   }
 }
