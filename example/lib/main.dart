@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.light(
               brightness: Brightness.light,
               primary: carbonBlue60,
+              // primary: carbonTheme.buttonPrimary,
               onPrimary: carbonWhite,
               secondary: carbonGray90,
               onSecondary: carbonWhite,
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
           themeMode:
               themeNotifier.themeMode, // Use the themeMode from the notifier
           home: const MyHomePage(title: 'Carbon Flutter'),
+          debugShowCheckedModeBanner: false,
         );
       },
     );
@@ -109,42 +111,86 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final carbonTheme = Theme.of(context).extension<CarbonTheme>()!;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.surface,
         title: Text(widget.title),
+        actions: [
+          IconButton(
+            onPressed: () => themeNotifier.toggleTheme(),
+            icon: Icon(
+              themeNotifier.themeMode == ThemeMode.dark
+                  ? Icons.light_mode
+                  : Icons.dark_mode,
+            ),
+          ),
+        ],
       ),
       drawer: Drawer(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0.0)),
-        child: IconButton(
-          onPressed: () => themeNotifier.toggleTheme(),
-          icon: Icon(
-            themeNotifier.themeMode == ThemeMode.dark
-                ? Icons.light_mode
-                : Icons.dark_mode,
-          ),
-        ),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(
-              width: 200.0, // Set your desired width
-              child: CarbonTextInput(),
+              width: 300.0, // Set your desired width
+              child: CarbonTextInput(labelText: 'Enter Device or PV name'),
             ),
             Padding(
               padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0),
             ),
-            CarbonElevatedButton(
-              label: 'Primary Button',
-              onPressed: () => print('Carbon button pressed'),
-              type: CarbonButtonType.primary,
+            Divider(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(padding: EdgeInsetsGeometry.directional(start: 4.0)),
+                Text(
+                  'Data Acquisition Parameters',
+                  style: TextStyle(
+                    color: carbonTheme.textPrimary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
+            Text(
+              'Reading',
+              style: TextStyle(color: carbonTheme.textPrimary),
+              textAlign: TextAlign.start,
+            ),
+            ReadingSwitch(),
             Padding(
               padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0),
             ),
-            ContextSwitch(),
+            Text(
+              'Acquisition',
+              style: TextStyle(color: carbonTheme.textPrimary),
+            ),
+            AcquisitionSwitch(),
+            Padding(
+              padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0),
+            ),
+            CarbonDropdown(),
+            Padding(
+              padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CarbonElevatedButton(
+                  label: 'Retrive Data',
+                  onPressed: () => print('Retrieving Data'),
+                  type: CarbonButtonType.ghost,
+                ),
+                CarbonElevatedButton(
+                  label: 'Load File',
+                  onPressed: () => print('Loading File'),
+                  type: CarbonButtonType.ghost,
+                ),
+              ],
+            ),
           ],
         ),
       ),
@@ -152,15 +198,15 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class ContextSwitch extends StatefulWidget {
-  const ContextSwitch({super.key});
+class ReadingSwitch extends StatefulWidget {
+  const ReadingSwitch({super.key});
 
   @override
-  State<ContextSwitch> createState() => _ContextSwitchState();
+  State<ReadingSwitch> createState() => _ReadingSwitchState();
 }
 
-class _ContextSwitchState extends State<ContextSwitch> {
-  var selectedSegment = 2;
+class _ReadingSwitchState extends State<ReadingSwitch> {
+  var selectedSegment = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -169,9 +215,35 @@ class _ContextSwitchState extends State<ContextSwitch> {
         setState(() => selectedSegment = newSelection.first);
       },
       segments: [
-        ButtonSegment(value: 0, label: const Text('First section')),
-        ButtonSegment(value: 1, label: const Text('Second section')),
-        ButtonSegment(value: 2, label: const Text('Third section')),
+        ButtonSegment(value: 0, label: const Text('Scalar')),
+        ButtonSegment(value: 1, label: const Text('Array')),
+      ],
+      selected: {selectedSegment},
+    );
+  }
+}
+
+class AcquisitionSwitch extends StatefulWidget {
+  const AcquisitionSwitch({super.key});
+
+  @override
+  State<AcquisitionSwitch> createState() => _AcquisitionSwitchState();
+}
+
+class _AcquisitionSwitchState extends State<AcquisitionSwitch> {
+  var selectedSegment = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return CarbonContextSwitch(
+      onSelectionChanged: (Set<dynamic> newSelection) {
+        setState(() => selectedSegment = newSelection.first);
+      },
+      segments: [
+        ButtonSegment(value: 0, label: const Text('Once')),
+        ButtonSegment(value: 1, label: const Text('Once On-Event')),
+        ButtonSegment(value: 2, label: const Text('Periodic')),
+        ButtonSegment(value: 3, label: const Text('On-Event')),
       ],
       selected: {selectedSegment},
     );

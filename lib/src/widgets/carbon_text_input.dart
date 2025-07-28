@@ -22,11 +22,12 @@ class CarbonTextInput extends StatelessWidget {
       cursorColor: carbonTheme.textPrimary,
       cursorWidth: 1.0,
       decoration: InputDecoration(
-        labelText: 'Label text',
+        labelText: labelText,
+        labelStyle: TextStyle(color: carbonTheme.textSecondary),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        hintText: 'Placeholder text',
+        hintText: placeholderText,
         hintStyle: TextStyle(color: carbonTheme.textPlaceholder),
-        helperText: 'Helper text',
+        helperText: helperText,
         fillColor: carbonTheme.field01,
         filled: true,
         border: UnderlineInputBorder(
