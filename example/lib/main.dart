@@ -1,52 +1,79 @@
 import 'package:flutter/material.dart';
 import 'package:carbon_flutter/carbon_flutter.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => themeNotifier,
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Carbon Flutter',
-      theme: ThemeData(
-        textTheme: carbonTextTheme(carbonGray100),
-        colorScheme: ColorScheme.light(
-          brightness: Brightness.light,
-          primary: carbonBlue60,
-          onPrimary: carbonWhite,
-          secondary: carbonGray90,
-          onSecondary: carbonWhite,
-          error: carbonRed60,
-          onError: carbonWhite,
-          surface: carbonWhite,
-          onSurface: carbonGray90,
-        ),
-        extensions: <ThemeExtension<dynamic>>[CarbonTheme.white],
-      ),
-      darkTheme: ThemeData(
-        textTheme: carbonTextTheme(carbonGray100),
-        colorScheme: ColorScheme.dark(
-          brightness: Brightness.dark,
-          primary: carbonBlue60,
-          onPrimary: carbonWhite,
-          secondary: carbonGray90,
-          onSecondary: carbonWhite,
-          error: carbonRed60,
-          onError: carbonWhite,
-          surface: carbonGray100,
-          onSurface: carbonGray10,
-        ),
-        extensions: <ThemeExtension<dynamic>>[CarbonTheme.gray100],
-      ),
-      home: const MyHomePage(title: 'Carbon Flutter'),
+    return Consumer<ThemeNotifier>(
+      // Wrap with Consumer
+      builder: (context, themeNotifier, child) {
+        return MaterialApp(
+          title: 'Carbon Flutter',
+          theme: ThemeData(
+            textTheme: carbonTextTheme(carbonGray100),
+            colorScheme: ColorScheme.light(
+              brightness: Brightness.light,
+              primary: carbonBlue60,
+              onPrimary: carbonWhite,
+              secondary: carbonGray90,
+              onSecondary: carbonWhite,
+              error: carbonRed60,
+              onError: carbonWhite,
+              surface: carbonWhite,
+              onSurface: carbonGray90,
+            ),
+            extensions: <ThemeExtension<dynamic>>[CarbonTheme.white],
+          ),
+          darkTheme: ThemeData(
+            textTheme: carbonTextTheme(carbonGray100),
+            colorScheme: ColorScheme.dark(
+              brightness: Brightness.dark,
+              primary: carbonBlue60,
+              onPrimary: carbonWhite,
+              secondary: carbonGray90,
+              onSecondary: carbonWhite,
+              error: carbonRed60,
+              onError: carbonWhite,
+              surface: carbonGray100,
+              onSurface: carbonGray10,
+            ),
+            extensions: <ThemeExtension<dynamic>>[CarbonTheme.gray100],
+          ),
+          themeMode:
+              themeNotifier.themeMode, // Use the themeMode from the notifier
+          home: const MyHomePage(title: 'Carbon Flutter'),
+        );
+      },
     );
   }
 }
+
+class ThemeNotifier extends ChangeNotifier {
+  ThemeMode _themeMode = ThemeMode.system;
+
+  ThemeMode get themeMode => _themeMode;
+
+  void toggleTheme() {
+    _themeMode = _themeMode == ThemeMode.light
+        ? ThemeMode.dark
+        : ThemeMode.light;
+    notifyListeners(); // Notify listeners after changing the theme
+  }
+}
+
+final themeNotifier = ThemeNotifier();
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -82,42 +109,24 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
         backgroundColor: Theme.of(context).colorScheme.surface,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
       drawer: Drawer(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0.0)),
+        child: IconButton(
+          onPressed: () => themeNotifier.toggleTheme(),
+          icon: Icon(
+            themeNotifier.themeMode == ThemeMode.dark
+                ? Icons.light_mode
+                : Icons.dark_mode,
+          ),
+        ),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(
