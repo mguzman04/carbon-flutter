@@ -8,6 +8,7 @@ class CarbonDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     final carbonTheme = Theme.of(context).extension<CarbonTheme>()!;
     return DropdownMenu(
+      width: 400.00,
       hintText: 'Hint Text',
       helperText: 'Helper Text',
       dropdownMenuEntries: [],

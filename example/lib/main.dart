@@ -132,10 +132,26 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(padding: EdgeInsetsGeometry.directional(start: 4.0)),
+                Icon(Icons.stacked_line_chart),
+                Padding(padding: EdgeInsetsGeometry.directional(start: 4.0)),
+                Text(
+                  'Channels',
+                  style: TextStyle(
+                    color: carbonTheme.textPrimary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            Padding(padding: EdgeInsets.all(8.0)),
             SizedBox(
-              width: 300.0, // Set your desired width
+              width: 400.0, // Set your desired width
               child: CarbonTextInput(labelText: 'Enter Device or PV name'),
             ),
             Padding(
@@ -146,6 +162,8 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(padding: EdgeInsetsGeometry.directional(start: 4.0)),
+                Icon(Icons.wifi),
+                Padding(padding: EdgeInsetsGeometry.directional(start: 4.0)),
                 Text(
                   'Data Acquisition Parameters',
                   style: TextStyle(
@@ -155,6 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
+            Padding(padding: EdgeInsets.all(8.0)),
             Text(
               'Reading',
               style: TextStyle(color: carbonTheme.textPrimary),
@@ -191,6 +210,26 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
+            Padding(
+              padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0),
+            ),
+            Divider(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(padding: EdgeInsetsGeometry.directional(start: 4.0)),
+                Icon(Icons.bar_chart),
+                Padding(padding: EdgeInsetsGeometry.directional(start: 4.0)),
+                Text(
+                  'Display Parameters',
+                  style: TextStyle(
+                    color: carbonTheme.textPrimary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            Padding(padding: EdgeInsets.all(8.0)),
           ],
         ),
       ),
