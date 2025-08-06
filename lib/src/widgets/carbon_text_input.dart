@@ -14,7 +14,7 @@ class CarbonTextInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final carbonTheme = Theme.of(context).extension<CarbonTheme>()!;
+    final carbonTheme = Theme.of(context).extension<CarbonColorTokens>()!;
     return TextField(
       // readOnly: true,
       // enabled: false,

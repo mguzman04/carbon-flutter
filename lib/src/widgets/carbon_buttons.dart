@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:carbon_flutter/src/themes/colors.dart';
 
 ButtonStyle _carbonPrimaryButtonStyle(BuildContext context) {
-  final carbonTheme = Theme.of(context).extension<CarbonTheme>()!;
+  final carbonTheme = Theme.of(context).extension<CarbonColorTokens>()!;
   return ButtonStyle(
     textStyle: WidgetStateProperty.all<TextStyle>(
       CarbonTextStyle(textColor: Colors.red), // TODO: This doesn't do anything
@@ -83,7 +83,7 @@ ButtonStyle _carbonPrimaryButtonStyle(BuildContext context) {
 }
 
 ButtonStyle _carbonSecondaryButtonStyle(BuildContext context) {
-  final carbonTheme = Theme.of(context).extension<CarbonTheme>()!;
+  final carbonTheme = Theme.of(context).extension<CarbonColorTokens>()!;
   return ButtonStyle(
     textStyle: WidgetStateProperty.all<TextStyle>(
       CarbonTextStyle(
@@ -149,7 +149,7 @@ ButtonStyle _carbonSecondaryButtonStyle(BuildContext context) {
 }
 
 ButtonStyle _carbonTertiaryButtonStyle(BuildContext context) {
-  final carbonTheme = Theme.of(context).extension<CarbonTheme>()!;
+  final carbonTheme = Theme.of(context).extension<CarbonColorTokens>()!;
   return ButtonStyle(
     textStyle: WidgetStateProperty.all<TextStyle>(
       CarbonTextStyle(
@@ -234,7 +234,7 @@ ButtonStyle _carbonTertiaryButtonStyle(BuildContext context) {
 }
 
 ButtonStyle _carbonGhostButtonStyle(BuildContext context) {
-  final carbonTheme = Theme.of(context).extension<CarbonTheme>()!;
+  final carbonTheme = Theme.of(context).extension<CarbonColorTokens>()!;
   return ButtonStyle(
     textStyle: WidgetStateProperty.all<TextStyle>(
       CarbonTextStyle(
@@ -314,7 +314,7 @@ ButtonStyle _carbonGhostButtonStyle(BuildContext context) {
 }
 
 ButtonStyle _carbonDangerButtonStyle(BuildContext context) {
-  final carbonTheme = Theme.of(context).extension<CarbonTheme>()!;
+  final carbonTheme = Theme.of(context).extension<CarbonColorTokens>()!;
   return ButtonStyle(
     textStyle: WidgetStateProperty.all<TextStyle>(
       CarbonTextStyle(
@@ -394,7 +394,7 @@ ButtonStyle _carbonDangerButtonStyle(BuildContext context) {
 }
 
 ButtonStyle _carbonDangerTertiaryButtonStyle(BuildContext context) {
-  final carbonTheme = Theme.of(context).extension<CarbonTheme>()!;
+  final carbonTheme = Theme.of(context).extension<CarbonColorTokens>()!;
   return ButtonStyle(
     textStyle: WidgetStateProperty.all<TextStyle>(
       CarbonTextStyle(
@@ -481,7 +481,7 @@ ButtonStyle _carbonDangerTertiaryButtonStyle(BuildContext context) {
 }
 
 ButtonStyle _carbonDangerGhostButtonStyle(BuildContext context) {
-  final carbonTheme = Theme.of(context).extension<CarbonTheme>()!;
+  final carbonTheme = Theme.of(context).extension<CarbonColorTokens>()!;
   return ButtonStyle(
     textStyle: WidgetStateProperty.all<TextStyle>(
       CarbonTextStyle(
@@ -604,18 +604,19 @@ class CarbonElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ButtonStyle carbonButtonStyle = switch (type) {
+      CarbonButtonType.primary => _carbonPrimaryButtonStyle(context),
+      CarbonButtonType.secondary => _carbonSecondaryButtonStyle(context),
+      CarbonButtonType.tertiary => _carbonTertiaryButtonStyle(context),
+      CarbonButtonType.ghost => _carbonGhostButtonStyle(context),
+      CarbonButtonType.danger => _carbonDangerButtonStyle(context),
+      CarbonButtonType.dangerTertiary => _carbonDangerTertiaryButtonStyle(
+        context,
+      ),
+      CarbonButtonType.dangerGhost => _carbonDangerGhostButtonStyle(context),
+    };
     return ElevatedButton(
-      style: switch (type) {
-        CarbonButtonType.primary => _carbonPrimaryButtonStyle(context),
-        CarbonButtonType.secondary => _carbonSecondaryButtonStyle(context),
-        CarbonButtonType.tertiary => _carbonTertiaryButtonStyle(context),
-        CarbonButtonType.ghost => _carbonGhostButtonStyle(context),
-        CarbonButtonType.danger => _carbonDangerButtonStyle(context),
-        CarbonButtonType.dangerTertiary => _carbonDangerTertiaryButtonStyle(
-          context,
-        ),
-        CarbonButtonType.dangerGhost => _carbonDangerGhostButtonStyle(context),
-      },
+      style: carbonButtonStyle,
       onPressed: isEnabled ? onPressed : null,
       child: Text(label),
     );

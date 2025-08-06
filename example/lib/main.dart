@@ -21,37 +21,8 @@ class MyApp extends StatelessWidget {
       builder: (context, themeNotifier, child) {
         return MaterialApp(
           title: 'Carbon Flutter',
-          theme: ThemeData(
-            textTheme: carbonTextTheme(carbonGray100),
-            colorScheme: ColorScheme.light(
-              brightness: Brightness.light,
-              primary: carbonBlue60,
-              // primary: carbonTheme.buttonPrimary,
-              onPrimary: carbonWhite,
-              secondary: carbonGray90,
-              onSecondary: carbonWhite,
-              error: carbonRed60,
-              onError: carbonWhite,
-              surface: carbonWhite,
-              onSurface: carbonGray90,
-            ),
-            extensions: <ThemeExtension<dynamic>>[CarbonTheme.white],
-          ),
-          darkTheme: ThemeData(
-            textTheme: carbonTextTheme(carbonGray100),
-            colorScheme: ColorScheme.dark(
-              brightness: Brightness.dark,
-              primary: carbonBlue60,
-              onPrimary: carbonWhite,
-              secondary: carbonGray90,
-              onSecondary: carbonWhite,
-              error: carbonRed60,
-              onError: carbonWhite,
-              surface: carbonGray100,
-              onSurface: carbonGray10,
-            ),
-            extensions: <ThemeExtension<dynamic>>[CarbonTheme.gray100],
-          ),
+          theme: CarbonTokens.buildLightTheme(),
+          darkTheme: CarbonTokens.buildDarkTheme(),
           themeMode:
               themeNotifier.themeMode, // Use the themeMode from the notifier
           home: const MyHomePage(title: 'Carbon Flutter'),
@@ -111,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final carbonTheme = Theme.of(context).extension<CarbonTheme>()!;
+    final carbonTheme = Theme.of(context).extension<CarbonColorTokens>()!;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.surface,

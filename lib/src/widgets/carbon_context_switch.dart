@@ -26,7 +26,7 @@ class CarbonContextSwitch extends StatelessWidget {
 }
 
 ButtonStyle _carbonContextSwitchStyle(BuildContext context) {
-  final carbonTheme = Theme.of(context).extension<CarbonTheme>()!;
+  final carbonTheme = Theme.of(context).extension<CarbonColorTokens>()!;
   return ButtonStyle(
     // alignment: ,
     // animationDuration: ,
