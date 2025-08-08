@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:carbon_flutter/src/widgets/carbon_buttons.dart';
 import 'package:carbon_flutter/src/themes/carbon_tokens.dart';
+import 'package:carbon_flutter/src/themes/colors.dart';
 
 // Materials Different Widget states:
 // - disabled: when onPressed is null
@@ -12,68 +13,109 @@ import 'package:carbon_flutter/src/themes/carbon_tokens.dart';
 // - selected: default or active state
 
 void main() {
-  var lightTokens = CarbonTokens.white;
-  var darkTokens = CarbonTokens.gray100;
+  group('CarbonElevatedButton Tests', () {
+    var lightTokens = CarbonTokens.white;
+    var darkTokens = CarbonTokens.gray100;
 
-  testWidgets('Test Primary Button Design', (WidgetTester tester) async {
-    await tester.pumpWidget(
-      const TestWidget(
-        title: 'Primary button states test',
-        message: 'Do I need this?',
-      ),
-    );
+    testWidgets('Test Primary Button Default State', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(
+        const TestWidget(
+          title: 'Primary button states test',
+          message: 'Do I need this?',
+        ),
+      );
 
-    // Need to find Elevated button since Primary button is built off of it
-    final primaryButton = tester.widget<ElevatedButton>(
-      find.byType(ElevatedButton),
-    );
+      // Need to find Elevated button since Primary button is built off of it
+      final primaryButton = tester.widget<ElevatedButton>(
+        find.byType(ElevatedButton),
+      );
 
-    // Test default state
-    final buttonDefaultColor = primaryButton.style?.backgroundColor?.resolve(
-      {},
-    );
-    final buttonDefaultTextColor = primaryButton.style?.foregroundColor
-        ?.resolve({});
+      // Test default state
+      final buttonDefaultColor = primaryButton.style?.backgroundColor?.resolve(
+        {},
+      );
+      final buttonDefaultTextColor = primaryButton.style?.foregroundColor
+          ?.resolve({});
 
-    expect(
-      buttonDefaultColor,
-      lightTokens.buttonPrimary,
-      reason: "Incorrect primary color",
-    );
-    expect(
-      buttonDefaultTextColor,
-      lightTokens.textOnColor,
-      reason: "Incorrect text color",
-    );
+      expect(
+        buttonDefaultColor,
+        lightTokens.buttonPrimary,
+        reason: "Incorrect primary color",
+      );
+      expect(
+        buttonDefaultTextColor,
+        lightTokens.textOnColor,
+        reason: "Incorrect text color",
+      );
+    });
 
-    // Tap the button
-    await tester.tap(find.byType(ElevatedButton));
+    testWidgets('Test Primary Button Pressed State', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(
+        const TestWidget(
+          title: 'Primary button states test',
+          message: 'Do I need this?',
+        ),
+      );
 
-    // Rebuild the widget tree
-    await tester.pump();
+      // Tap the button
+      await tester.tap(find.byType(ElevatedButton));
 
-    // Get the button again, as it might have been rebuilt
-    final primaryButtonAfterTap = tester.widget<ElevatedButton>(
-      find.byType(ElevatedButton),
-    );
+      // Rebuild the widget tree
+      await tester.pump();
 
-    // Resolve the colors *after* the tap and pump
-    final buttonPressedColor = primaryButtonAfterTap.style?.backgroundColor
-        ?.resolve({WidgetState.pressed});
-    final buttonPressedTextColor = primaryButtonAfterTap.style?.foregroundColor
-        ?.resolve({WidgetState.pressed});
+      // Get the button again, as it might have been rebuilt
+      final primaryButtonAfterTap = tester.widget<ElevatedButton>(
+        find.byType(ElevatedButton),
+      );
 
-    // Assert that the colors have changed to the pressed state
-    expect(
-      buttonPressedColor,
-      lightTokens.buttonPrimaryActive,
-      reason: "Incorrect pressed primary color",
-    );
-    expect(
-      buttonPressedTextColor,
-      lightTokens.textOnColor,
-      reason: "Incorrect pressed text color",
-    );
+      // Resolve the colors *after* the tap and pump
+      final buttonPressedColor = primaryButtonAfterTap.style?.backgroundColor
+          ?.resolve({WidgetState.pressed});
+      final buttonPressedTextColor = primaryButtonAfterTap
+          .style
+          ?.foregroundColor
+          ?.resolve({WidgetState.pressed});
+      final buttonPressedOverlayColor = primaryButtonAfterTap
+          .style
+          ?.overlayColor
+          ?.resolve({WidgetState.pressed});
+
+      // Assert that the colors have changed to the pressed state
+      expect(
+        buttonPressedColor,
+        lightTokens.buttonPrimary,
+        reason: "Incorrect pressed primary color",
+      );
+      expect(
+        buttonPressedTextColor,
+        lightTokens.textOnColor,
+        reason: "Incorrect pressed text color",
+      );
+      expect(
+        buttonPressedOverlayColor,
+        lightTokens.buttonPrimaryActive,
+        reason: "Incorrect pressed overlay color",
+      );
+    });
+
+    testWidgets('Test Primary Button Focus State', (WidgetTester tester) async {
+      fail('Not yet implemented');
+    });
+    testWidgets('Test Primary Button Hover State', (WidgetTester tester) async {
+      fail('Not yet implemented');
+    });
+    testWidgets('Test Primary Button Disabled State ', (
+      WidgetTester tester,
+    ) async {
+      fail('Not yet implemented');
+    });
+    testWidgets('Test Primary Button with Icon', (WidgetTester tester) async {
+      fail('Not yet implemented');
+    });
   });
 }
 
