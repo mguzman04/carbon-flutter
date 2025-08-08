@@ -40,7 +40,9 @@ ButtonStyle _carbonPrimaryButtonStyle(BuildContext context) {
     // shadowColor: ,
     // surfaceTintColor: ,
     elevation: WidgetStateProperty.all<double>(0.0),
-    padding: WidgetStateProperty.all(EdgeInsets.fromLTRB(16, 20, 64, 20)),
+    padding: WidgetStateProperty.all(
+      EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+    ),
     // minimumSize: ,
     // fixedSize: ,
     // maximumSize: ,
@@ -120,7 +122,9 @@ ButtonStyle _carbonSecondaryButtonStyle(BuildContext context) {
       WidgetState.any: Colors.transparent,
     }),
     elevation: WidgetStateProperty.all<double>(0.0),
-    padding: WidgetStateProperty.all(EdgeInsets.fromLTRB(16, 20, 64, 20)),
+    padding: WidgetStateProperty.all(
+      EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
+    ),
     shape: WidgetStateProperty<OutlinedBorder?>.fromMap(<
       WidgetStatesConstraint,
       OutlinedBorder
@@ -195,7 +199,9 @@ ButtonStyle _carbonTertiaryButtonStyle(BuildContext context) {
       WidgetState.any: Colors.transparent,
     }),
     elevation: WidgetStateProperty.all<double>(0.0),
-    padding: WidgetStateProperty.all(EdgeInsets.fromLTRB(16, 20, 64, 20)),
+    padding: WidgetStateProperty.all(
+      EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+    ),
     shape: WidgetStateProperty<OutlinedBorder?>.fromMap(
       <WidgetStatesConstraint, OutlinedBorder>{
         WidgetState.focused: RoundedRectangleBorder(
@@ -279,7 +285,9 @@ ButtonStyle _carbonGhostButtonStyle(BuildContext context) {
       WidgetState.any: Colors.transparent,
     }),
     elevation: WidgetStateProperty.all<double>(0.0),
-    padding: WidgetStateProperty.all(EdgeInsets.fromLTRB(16, 20, 64, 20)),
+    padding: WidgetStateProperty.all(
+      EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+    ),
     shape: WidgetStateProperty<OutlinedBorder?>.fromMap(
       <WidgetStatesConstraint, OutlinedBorder>{
         WidgetState.focused: RoundedRectangleBorder(
@@ -348,7 +356,9 @@ ButtonStyle _carbonDangerButtonStyle(BuildContext context) {
       WidgetState.any: Colors.transparent,
     }),
     elevation: WidgetStateProperty.all<double>(0.0),
-    padding: WidgetStateProperty.all(EdgeInsets.fromLTRB(16, 20, 64, 20)),
+    padding: WidgetStateProperty.all(
+      EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+    ),
     side: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
       if (states.contains(WidgetState.pressed) ||
           states.contains(WidgetState.focused)) {
@@ -436,7 +446,9 @@ ButtonStyle _carbonDangerTertiaryButtonStyle(BuildContext context) {
       WidgetState.any: Colors.transparent,
     }),
     elevation: WidgetStateProperty.all<double>(0.0),
-    padding: WidgetStateProperty.all(EdgeInsets.fromLTRB(16, 20, 64, 20)),
+    padding: WidgetStateProperty.all(
+      EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+    ),
     side: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
       if (states.contains(WidgetState.pressed) ||
           states.contains(WidgetState.focused)) {
@@ -523,7 +535,9 @@ ButtonStyle _carbonDangerGhostButtonStyle(BuildContext context) {
       WidgetState.any: Colors.transparent,
     }),
     elevation: WidgetStateProperty.all<double>(0.0),
-    padding: WidgetStateProperty.all(EdgeInsets.fromLTRB(16, 20, 64, 20)),
+    padding: WidgetStateProperty.all(
+      EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+    ),
     side: WidgetStateProperty.resolveWith((Set<WidgetState> states) {
       if (states.contains(WidgetState.pressed) ||
           states.contains(WidgetState.focused)) {
@@ -588,8 +602,11 @@ enum CarbonButtonType {
 class CarbonElevatedButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
+  final VoidCallback? onLongPress;
+  final ValueChanged<bool>? onHover;
   final bool isEnabled;
   final CarbonButtonType type;
+  final IconData? icon;
 
   /// Create a Carbon-styled button.
   ///
@@ -600,6 +617,9 @@ class CarbonElevatedButton extends StatelessWidget {
     this.onPressed,
     this.isEnabled = true,
     this.type = CarbonButtonType.primary,
+    this.icon,
+    this.onLongPress,
+    this.onHover,
   });
 
   @override
@@ -618,7 +638,29 @@ class CarbonElevatedButton extends StatelessWidget {
     return ElevatedButton(
       style: carbonButtonStyle,
       onPressed: isEnabled ? onPressed : null,
-      child: Text(label),
+      child: _ButtonChild(label: label, icon: icon),
+    );
+  }
+}
+
+class _ButtonChild extends StatelessWidget {
+  final String label;
+  final IconData? icon;
+
+  const _ButtonChild({super.key, required this.label, this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(label),
+        if (label != '' && icon == null)
+          SizedBox(width: 48.0)
+        else if (label != '' && icon != null)
+          SizedBox(width: 32.0),
+        Icon(icon),
+      ],
     );
   }
 }

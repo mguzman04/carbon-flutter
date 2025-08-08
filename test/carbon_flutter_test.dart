@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:carbon_flutter/src/widgets/carbon_buttons.dart';
 import 'package:carbon_flutter/src/themes/carbon_tokens.dart';
-import 'package:carbon_flutter/src/themes/colors.dart';
 
 // Materials Different Widget states:
 // - disabled: when onPressed is null
@@ -13,7 +12,7 @@ import 'package:carbon_flutter/src/themes/colors.dart';
 // - selected: default or active state
 
 void main() {
-  group('CarbonElevatedButton Tests', () {
+  group('CarbonElevatedButton Primary Tests', () {
     var lightTokens = CarbonTokens.white;
     var darkTokens = CarbonTokens.gray100;
 
@@ -117,7 +116,37 @@ void main() {
       fail('Not yet implemented');
     });
   });
+
+  group('CarbonElevatedButton Secondary Tests', () {
+    fail('Not Implemented');
+  });
+
+  group('CarbonElevatedButton Tertiary Tests', () {
+    fail('Not Implemented');
+  });
+
+  group('CarbonElevatedButton Ghost Tests', () {
+    fail('Not Implemented');
+  });
+
+  group('CarbonElevatedButton Danger Tests', () {
+    fail('Not Implemented');
+  });
+
+  group('CarbonElevatedButton Danger Tertiary Tests', () {
+    fail('Not Implemented');
+  });
+
+  group('CarbonElevatedButton Danger Ghost Tests', () {
+    fail('Not Implemented');
+  });
+
+  group('CarbonElevatedButton Icon Tests', () {
+    fail('Not Implemented');
+  });
 }
+
+// group('CarbonElevatedButton Secondary Tests',)
 
 class TestWidget extends StatelessWidget {
   const TestWidget({super.key, required this.title, required this.message});

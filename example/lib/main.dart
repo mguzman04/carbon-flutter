@@ -104,107 +104,139 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(padding: EdgeInsetsGeometry.directional(start: 4.0)),
-                Icon(Icons.stacked_line_chart),
-                Padding(padding: EdgeInsetsGeometry.directional(start: 4.0)),
-                Text(
-                  'Channels',
-                  style: TextStyle(
-                    color: carbonTheme.textPrimary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            Padding(padding: EdgeInsets.all(8.0)),
-            SizedBox(
-              width: 400.0, // Set your desired width
-              child: CarbonTextInput(labelText: 'Enter Device or PV name'),
-            ),
-            Padding(
-              padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0),
-            ),
-            Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(padding: EdgeInsetsGeometry.directional(start: 4.0)),
-                Icon(Icons.wifi),
-                Padding(padding: EdgeInsetsGeometry.directional(start: 4.0)),
-                Text(
-                  'Data Acquisition Parameters',
-                  style: TextStyle(
-                    color: carbonTheme.textPrimary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            Padding(padding: EdgeInsets.all(8.0)),
-            Text(
-              'Reading',
-              style: TextStyle(color: carbonTheme.textPrimary),
-              textAlign: TextAlign.start,
-            ),
-            ReadingSwitch(),
-            Padding(
-              padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0),
-            ),
-            Text(
-              'Acquisition',
-              style: TextStyle(color: carbonTheme.textPrimary),
-            ),
-            AcquisitionSwitch(),
-            Padding(
-              padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0),
-            ),
-            CarbonDropdown(),
-            Padding(
-              padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CarbonElevatedButton(
-                  label: 'Retrive Data',
-                  onPressed: () => print('Retrieving Data'),
-                  type: CarbonButtonType.ghost,
-                ),
-                CarbonElevatedButton(
-                  label: 'Load File',
-                  onPressed: () => print('Loading File'),
-                  type: CarbonButtonType.ghost,
-                ),
-              ],
-            ),
-            Padding(
-              padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0),
-            ),
-            Divider(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(padding: EdgeInsetsGeometry.directional(start: 4.0)),
-                Icon(Icons.bar_chart),
-                Padding(padding: EdgeInsetsGeometry.directional(start: 4.0)),
-                Text(
-                  'Display Parameters',
-                  style: TextStyle(
-                    color: carbonTheme.textPrimary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            Padding(padding: EdgeInsets.all(8.0)),
-          ],
+          // children: plotSetup(carbonTheme),
+          children: buttonExample(),
         ),
       ),
     );
+  }
+
+  List<Widget> buttonExample() {
+    return <Widget>[
+      CarbonElevatedButton(label: 'Primary Button', onPressed: () => {}),
+      Padding(padding: EdgeInsets.all(8.0)),
+      CarbonElevatedButton(label: 'Disabled Primary Button'),
+      Padding(padding: EdgeInsets.all(8.0)),
+      CarbonElevatedButton(
+        label: 'Login',
+        icon: Icons.arrow_forward,
+        onPressed: () => {},
+      ),
+      Padding(padding: EdgeInsets.all(8.0)),
+      CarbonElevatedButton(label: '', icon: Icons.add, onPressed: () => {}),
+      Padding(padding: EdgeInsets.all(8.0)),
+      CarbonElevatedButton(
+        label: 'Secondary Button',
+        type: CarbonButtonType.secondary,
+        onPressed: () => {},
+      ),
+      Padding(padding: EdgeInsets.all(8.0)),
+      CarbonElevatedButton(
+        label: 'Tertiary Button',
+        type: CarbonButtonType.tertiary,
+        onPressed: () => {},
+      ),
+      Padding(padding: EdgeInsets.all(8.0)),
+      CarbonElevatedButton(
+        label: 'Ghost Button',
+        type: CarbonButtonType.ghost,
+        onPressed: () => {},
+      ),
+      Padding(padding: EdgeInsets.all(8.0)),
+      CarbonElevatedButton(
+        label: 'Danger Button',
+        type: CarbonButtonType.danger,
+        onPressed: () => {},
+      ),
+    ];
+  }
+
+  List<Widget> plotSetup(CarbonColorTokens carbonTheme) {
+    return <Widget>[
+      Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Padding(padding: EdgeInsetsGeometry.directional(start: 4.0)),
+          Icon(Icons.stacked_line_chart),
+          Padding(padding: EdgeInsetsGeometry.directional(start: 4.0)),
+          Text(
+            'Channels',
+            style: TextStyle(
+              color: carbonTheme.textPrimary,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+      Padding(padding: EdgeInsets.all(8.0)),
+      SizedBox(
+        width: 400.0, // Set your desired width
+        child: CarbonTextInput(labelText: 'Enter Device or PV name'),
+      ),
+      Padding(padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0)),
+      Divider(),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Padding(padding: EdgeInsetsGeometry.directional(start: 4.0)),
+          Icon(Icons.wifi),
+          Padding(padding: EdgeInsetsGeometry.directional(start: 4.0)),
+          Text(
+            'Data Acquisition Parameters',
+            style: TextStyle(
+              color: carbonTheme.textPrimary,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+      Padding(padding: EdgeInsets.all(8.0)),
+      Text(
+        'Reading',
+        style: TextStyle(color: carbonTheme.textPrimary),
+        textAlign: TextAlign.start,
+      ),
+      ReadingSwitch(),
+      Padding(padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0)),
+      Text('Acquisition', style: TextStyle(color: carbonTheme.textPrimary)),
+      AcquisitionSwitch(),
+      Padding(padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0)),
+      CarbonDropdown(),
+      Padding(padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0)),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CarbonElevatedButton(
+            label: 'Retrive Data',
+            onPressed: () => print('Retrieving Data'),
+            type: CarbonButtonType.ghost,
+          ),
+          CarbonElevatedButton(
+            label: 'Load File',
+            onPressed: () => print('Loading File'),
+            type: CarbonButtonType.ghost,
+          ),
+        ],
+      ),
+      Padding(padding: EdgeInsetsGeometry.directional(top: 4.0, bottom: 4.0)),
+      Divider(),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Padding(padding: EdgeInsetsGeometry.directional(start: 4.0)),
+          Icon(Icons.bar_chart),
+          Padding(padding: EdgeInsetsGeometry.directional(start: 4.0)),
+          Text(
+            'Display Parameters',
+            style: TextStyle(
+              color: carbonTheme.textPrimary,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+      Padding(padding: EdgeInsets.all(8.0)),
+    ];
   }
 }
 
