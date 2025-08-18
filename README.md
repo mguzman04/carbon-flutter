@@ -11,8 +11,7 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/to/develop-packages).
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+An implementation of the [IBM Carbon design system](https://carbondesignsystem.com/) in the Flutter framework.
 
 ## Features
 
@@ -25,12 +24,7 @@ start using the package.
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
-```
+An working example of the available components will be in `example/` work in progress...
 
 ## Additional information
 
